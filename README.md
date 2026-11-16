@@ -591,7 +591,7 @@ flowchart LR
   - Restructured the workspace into clean semantic directories:
     - `docs/`: Active core manuals ([`Analyse_und_Inbetriebnahme_Aufnahmesystem.md`](docs/Analyse_und_Inbetriebnahme_Aufnahmesystem.md), [`01_initial_improvement_suggestions.md`](docs/01_initial_improvement_suggestions.md), and [`kurzbericht_fuer_prof_und_team.txt`](docs/kurzbericht_fuer_prof_und_team.txt)).
     - `docs/references/`: Academic foundation files ([`Abschlussarbeit_YuxuanLi.pdf`](docs/references/Abschlussarbeit_YuxuanLi.pdf), [`Analyse der Abschlussarbeit.md`](docs/references/Analyse%20der%20Abschlussarbeit.md), [`Ami.pdf`](docs/references/Ami.pdf)).
-    - `docs/session_logs/`: Raw session transcripts ([`acoustic_rig_test_observations_nov_12_2026.txt`](docs/session_logs/acoustic_rig_test_observations_nov_12_2026.txt), [`raspberrypi_setup_session.txt`](docs/session_logs/raspberrypi_setup_session.txt), [`consistent_server_raspberrpi.txt`](docs/session_logs/consistent_server_raspberrpi.txt), [`ami_document_upload_to_raspberrypi.txt`](docs/session_logs/ami_document_upload_to_raspberrypi.txt)).
+    - `docs/session_logs/001/`: Raw session transcripts ([`acoustic_rig_test_observations_nov_12_2026.txt`](docs/session_logs/001/acoustic_rig_test_observations_nov_12_2026.txt), [`raspberrypi_setup_session.txt`](docs/session_logs/001/raspberrypi_setup_session.txt), [`consistent_server_raspberrpi.txt`](docs/session_logs/001/consistent_server_raspberrpi.txt), [`ami_document_upload_to_raspberrypi.txt`](docs/session_logs/001/ami_document_upload_to_raspberrypi.txt)).
     - `codebase/`: Extracted Raspberry Pi codebase ([`raspi-aufnahmesystem/`](codebase/raspi-aufnahmesystem/)).
     - `data/`: Ingested multi-channel audio measurements ([`praktikum/`](data/praktikum/)).
   - Deployed backward-compatible NTFS directory junctions (`docs/praktikum` -> `data/praktikum` and `docs/raspi-aufnahmesystem` -> `codebase/raspi-aufnahmesystem`) ensuring existing tasks and scripts continue uninterrupted.
@@ -719,10 +719,11 @@ Assystenz system/
     │   │   ├── Analyse der Abschlussarbeit.md                 # Initial thesis breakdown
     │   │   └── Ami.pdf                                        # Initial commissioning chat archive
     │   └── session_logs/                                      # Raw terminal logs & experimental transcripts
-    │       ├── acoustic_rig_test_observations_nov_12_2026.txt  # Nov 12 lab session findings
-    │       ├── raspberrypi_setup_session.txt                  # Raspberry Pi setup & sweep transcript
-    │       ├── consistent_server_raspberrpi.txt               # Windows OpenSSH Server configuration log
-    │       └── ami_document_upload_to_raspberrypi.txt         # SCP deployment record
+    │       └── 001/                                           # Session 001 (Nov 12, 2026 commissioning & test)
+    │           ├── acoustic_rig_test_observations_nov_12_2026.txt
+    │           ├── raspberrypi_setup_session.txt
+    │           ├── consistent_server_raspberrpi.txt
+    │           └── ami_document_upload_to_raspberrypi.txt
     ├── codebase/                                              # Testbed source code repository
     │   └── raspi-aufnahmesystem/                              # Complete /home/ami Raspberry Pi codebase
     └── data/                                                  # Experimental recordings & dataset archives
@@ -738,7 +739,7 @@ Assystenz system/
 3. **Commissioning & Workflow Manual:** [`docs/Analyse_und_Inbetriebnahme_Aufnahmesystem.md`](docs/Analyse_und_Inbetriebnahme_Aufnahmesystem.md) (Consolidated guide covering hardware power, network setup, headless SSH, and frictionless execution).
 4. **Teammate & Professor Briefing Sheet:** [`docs/kurzbericht_fuer_prof_und_team.txt`](docs/kurzbericht_fuer_prof_und_team.txt) (Executive summary for presenting test results and bottlenecks to supervisors).
 5. **Expert Acoustic Engineering Report:** [`docs/02_praktikum_audio_analysis_expert_report.md`](docs/02_praktikum_audio_analysis_expert_report.md) (Rigorous 16-channel signal and TDOA/DOA evaluation by the 07:00 AM analysis bot).
-6. **Empirical Lab Test Log:** [`docs/session_logs/acoustic_rig_test_observations_nov_12_2026.txt`](docs/session_logs/acoustic_rig_test_observations_nov_12_2026.txt) (Detailed observations from the live acoustic sweep on Nov 12, 2026).
+6. **Empirical Lab Test Log:** [`docs/session_logs/001/acoustic_rig_test_observations_nov_12_2026.txt`](docs/session_logs/001/acoustic_rig_test_observations_nov_12_2026.txt) (Detailed observations from the live acoustic sweep on Nov 12, 2026).
 7. **Project Analysis & Optimization Plan:** [`docs/01_initial_improvement_suggestions.md`](docs/01_initial_improvement_suggestions.md) (v1.0 weakness catalog, baseline test protocols T1–T7, and prioritized mechanical/acoustic redesign).
 8. **Signal Processing References:**
    - J. Benesty, J. Chen, Y. Huang: *Microphone Array Signal Processing*, Springer, 2008.
