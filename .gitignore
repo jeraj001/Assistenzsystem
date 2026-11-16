@@ -1,0 +1,10 @@
+# Assistenzsystem Git Ignore
+**/Trash/**
+**/.cache/**
+**/.local/share/Trash/**
+**/chromium/**
+*.partial.wav
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

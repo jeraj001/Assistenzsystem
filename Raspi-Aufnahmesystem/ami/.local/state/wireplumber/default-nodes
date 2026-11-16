@@ -1,0 +1,5 @@
+[default-nodes]
+default.configured.audio.sink=dual_test
+default.configured.audio.sink.0=dual_output
+default.configured.audio.sink.1=bluez_output.2C_BA_CA_24_55_0F.1
+default.configured.audio.sink.2=bluez_output.B4_E7_B3_52_0C_8B.1

@@ -1,0 +1,23 @@
+{
+    "generated_at": "2026-08-07T10:53:03.335957+02:00",
+    "problem_recording_count": 1,
+    "issues": [
+        {
+            "speech_file": "1272-128104-0000.flac",
+            "recording_id": "1272-128104-0000",
+            "noise_file": "ch01.wav",
+            "pan_angle": 0.0,
+            "stepper_1_angle": 60.0,
+            "stepper_2_angle": 60.0,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "Incomplete recording: expected at least 17986593 bytes, got 14139244 bytes",
+                    "time": "2026-08-07T10:52:04.488332+02:00"
+                }
+            ]
+        }
+    ]
+}

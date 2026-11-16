@@ -1,0 +1,81 @@
+================================================================================
+EXPERIMENT & SYSTEM TEST LOG
+Date: Thursday, November 12, 2026
+Session Duration: ~11:00 AM – 5:00 PM (with ~1–1.5 hr break)
+Status: System functional; initial test sweeps executed; dismantling for the day
+================================================================================
+
+1. OVERALL SUMMARY
+------------------
+- The end-to-end software, audio playback/capture, and SSH file transfer
+  pipeline is now functional and capable of running automated test sweeps.
+- Recorded audio files from today's run still need to be inspected/verified.
+- Several critical hardware, acoustic, mechanical, and usability bottlenecks
+  were identified during live testing that must be addressed before full-scale
+  data collection.
+
+2. AUDIO & SPEAKER SYSTEM OBSERVATIONS
+--------------------------------------
+- Volume Imbalance Between Speakers:
+  * The main (active) speaker—which receives power directly and passes the
+    second audio channel to the passive speaker—is significantly louder than
+    the secondary speaker.
+  * Even the main speaker was quieter than expected overall.
+- Suspected Cable Attenuation Cause:
+  * The physical span of the setup is ~4–5 m max, yet a 30+ m (estimated ~50 m)
+    cable is currently routed between the primary and secondary speakers.
+  * Signal degradation over the excessive cable length likely accounts for the
+    severe volume drop on the passive speaker.
+- Action Items:
+  * Measure exact SPL levels of both speakers using a decibel (dB) meter.
+  * Shorten the speaker interconnect cable to match the ~4–5 m setup width,
+    add an external amplifier, or evaluate an alternative speaker setup.
+
+3. MICROPHONE ARRAY & ALIGNMENT (UMA-16 + PAN-TILT HAT)
+-------------------------------------------------------
+- The UMA-16 microphone array and Pan-Tilt HAT initialized and stabilized
+  properly during the sweep.
+- Action Items:
+  * Verify true physical 0-degree alignment using a plumb line.
+  * Adjust software reference offsets in the code if physical alignment deviates
+    from the nominal 0-degree baseline.
+
+4. MECHANICAL & STEPPER MOTOR LIMITATIONS (CRITICAL)
+----------------------------------------------------
+- Insufficient Torque / Step Skipping:
+  * During the 30-degree sweep test (90° -> 60°), the stepper motors stalled
+    and skipped steps (similar to an over-torqued drill clutch), moving the
+    speaker carts by only ~10–20 mm instead of the full 30° arc.
+  * Note: Power supply voltage during this check was 12 V (needs verification
+    at higher rated voltage/current, though mechanical load remains a primary
+    concern).
+- Extension Rod Bending & Load Dynamics:
+  * Two central stepper motors drive ~1.5 m extension rods (matte, lightweight
+    —likely aluminum or aluminum alloy) to maintain the 1.5 m speaker-to-mic
+    radius.
+  * Under load, torque fails to transmit along the full 1.5 m span (effective
+    rigidity breaks down under 1 m), causing the rods to visibly bow/bend near
+    the middle.
+  * High rolling/static friction on the carpeted ("rug") floor—combined with
+    the downward weight of the speaker, wheels, and mounting hardware—exceeds
+    the torque the current motor-and-rod linkage can overcome.
+- Action Items:
+  * Verify if incomplete setup or 12 V supply limit contributed to the stall,
+    and test at higher voltage/current if safe.
+  * Re-evaluate the mechanical drive architecture: upgrade to higher-torque
+    motors/gearboxes, stiffen or redesign the 1.5 m linkage to prevent bending,
+    or transition to a self-propelled/wheeled mobile cart drive system.
+
+5. WIRING, USABILITY & REPRODUCIBILITY
+--------------------------------------
+- Wiring Condition:
+  * Current cabling across the rig is messy ("nasty") and needs proper routing,
+    labeling, and strain relief.
+- Steep Setup & CLI Barrier:
+  * Setting up and operating the rig via SSH, command-line scripts, and manual
+    host verification is stressful and difficult for new users to replicate.
+- Action Items:
+  * Clean up and organize all power, motor, and audio wiring.
+  * Develop a standalone GUI / web control app to bridge setup, alignment,
+    and test execution so non-technical users can run sweeps without CLI/SSH.
+================================================================================

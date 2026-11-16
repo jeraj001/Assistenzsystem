@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xbel version="1.0"
+      xmlns:bookmark="http://www.freedesktop.org/standards/desktop-bookmarks"
+      xmlns:mime="http://www.freedesktop.org/standards/shared-mime-info"
+>
+  <bookmark href="file:///home/ami/Pan-Tilt_HAT_code/RaspberryPi/Servo_Driver/python/control.py" added="2026-05-07T12:16:55.728134Z" modified="2026-05-07T12:19:57.104230Z" visited="2026-05-07T12:16:55.728138Z">
+    <desc>Language: ; Encoding: UTF-8; Cursor: 30:22;</desc>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>Mousepad</bookmark:group>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Mousepad" exec="&apos;mousepad %u&apos;" modified="2026-05-07T12:19:33.118872Z" count="2"/>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-05-07T12:19:57.104226Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/Pan-Tilt_HAT_code/RaspberryPi/Servo_Driver/python/ttt.py" added="2026-05-07T13:16:46.978143Z" modified="2026-06-17T12:27:30.635327Z" visited="2026-05-07T13:16:46.978148Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-17T12:27:30.635324Z" count="5"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/dual.py" added="2026-05-08T11:20:21.883316Z" modified="2026-05-08T11:20:21.883326Z" visited="2026-05-08T11:20:21.883317Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-05-08T11:20:21.883322Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/loudspeaker_2_audios.py" added="2026-05-08T14:05:56.508940Z" modified="2026-05-08T14:05:56.508950Z" visited="2026-05-08T14:05:56.508941Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-05-08T14:05:56.508946Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/stepper.py" added="2026-05-22T08:32:38.643225Z" modified="2026-07-28T14:18:36.081375Z" visited="2026-05-22T08:32:38.643227Z">
+    <desc>Language: ; Encoding: UTF-8; Cursor: 0:0;</desc>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>Mousepad</bookmark:group>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Mousepad" exec="&apos;mousepad %u&apos;" modified="2026-05-22T08:32:43.577517Z" count="2"/>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-28T14:18:36.081368Z" count="6"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/stepper2.py" added="2026-06-05T12:54:51.531728Z" modified="2026-07-28T14:48:14.133524Z" visited="2026-06-05T12:54:51.531731Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-28T14:48:14.133520Z" count="5"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/motor.py" added="2026-06-15T12:34:06.701932Z" modified="2026-06-23T14:02:16.575516Z" visited="2026-06-15T12:34:06.701933Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-23T14:02:16.575513Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/Pan-Tilt_HAT_code/RaspberryPi/Servo_Driver/python/initialize.py" added="2026-06-15T13:45:27.671432Z" modified="2026-06-15T13:45:27.671444Z" visited="2026-06-15T13:45:27.671434Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-15T13:45:27.671439Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/servo_state.json" added="2026-06-15T14:05:01.453734Z" modified="2026-06-15T14:05:07.662717Z" visited="2026-06-15T14:05:01.453739Z">
+    <desc>Language: ; Encoding: UTF-8; Cursor: 0:0;</desc>
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>Mousepad</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="Mousepad" exec="&apos;mousepad %u&apos;" modified="2026-06-15T14:05:07.662711Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/main.py" added="2026-06-18T15:31:44.429252Z" modified="2026-07-29T11:53:50.176054Z" visited="2026-06-18T15:31:44.429254Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-29T11:53:50.176050Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/untitled" added="2026-06-18T15:39:22.286322Z" modified="2026-06-18T15:39:22.529726Z" visited="2026-06-18T15:39:22.286324Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/plain"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-18T15:39:22.529721Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/untitled.py" added="2026-06-18T15:39:52.728567Z" modified="2026-06-23T14:36:30.279621Z" visited="2026-06-18T15:39:52.728569Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-23T14:36:30.279611Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/dual.py" added="2026-06-23T14:27:15.672630Z" modified="2026-06-23T14:27:15.672642Z" visited="2026-06-23T14:27:15.672632Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-23T14:27:15.672637Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/motor+2audio.py" added="2026-06-23T14:37:00.704889Z" modified="2026-06-23T14:37:00.704901Z" visited="2026-06-23T14:37:00.704891Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-06-23T14:37:00.704895Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/record_and_play.py" added="2026-06-23T15:32:15.855413Z" modified="2026-07-27T11:47:23.068115Z" visited="2026-06-23T15:32:15.855415Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-27T11:47:23.068112Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/microphone.py" added="2026-06-23T15:33:23.711008Z" modified="2026-07-29T11:55:58.291421Z" visited="2026-06-23T15:33:23.711009Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-29T11:55:58.291404Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/realrecord.py" added="2026-07-27T13:07:38.661952Z" modified="2026-07-27T13:07:38.896260Z" visited="2026-07-27T13:07:38.661954Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-27T13:07:38.896253Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/realrecord_temp.py" added="2026-07-28T13:12:24.988053Z" modified="2026-07-28T13:12:25.229639Z" visited="2026-07-28T13:12:24.988056Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-28T13:12:25.229633Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/realrecord_func.py" added="2026-07-28T15:00:28.433011Z" modified="2026-07-28T15:00:28.685925Z" visited="2026-07-28T15:00:28.433014Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-28T15:00:28.685912Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///home/ami/testcode/main_temp.py" added="2026-07-30T10:17:20.806031Z" modified="2026-07-30T10:17:21.065111Z" visited="2026-07-30T10:17:20.806033Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-07-30T10:17:21.065106Z" count="2"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+  <bookmark href="file:///media/ami/TPU301/testcode/realrecord_func.py" added="2026-08-10T15:08:04.485712Z" modified="2026-08-10T15:08:04.485722Z" visited="2026-08-10T15:08:04.485713Z">
+    <info>
+      <metadata owner="http://freedesktop.org">
+        <mime:mime-type type="text/x-python"/>
+        <bookmark:groups>
+          <bookmark:group>geany</bookmark:group>
+        </bookmark:groups>
+        <bookmark:applications>
+          <bookmark:application name="geany" exec="&apos;geany %u&apos;" modified="2026-08-10T15:08:04.485718Z" count="1"/>
+        </bookmark:applications>
+      </metadata>
+    </info>
+  </bookmark>
+</xbel>

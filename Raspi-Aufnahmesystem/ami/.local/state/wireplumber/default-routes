@@ -1,0 +1,16 @@
+[default-routes]
+alsa_card.platform-fe00b840.mailbox:output:analog-output={"mute":false, "channelMap":["FL", "FR"], "channelVolumes":[0.630959, 0.630959], "latencyOffsetNsec":0}
+alsa_card.platform-fe00b840.mailbox:profile:output:stereo-fallback=["analog-output"]
+alsa_card.usb-miniDSP_UMA16v2_00026-00:output:analog-output={"channelVolumes":[0.511157, 0.511157], "latencyOffsetNsec":0, "channelMap":["FL", "FR"], "mute":false}
+alsa_card.usb-miniDSP_UMA16v2_00026-00:profile:output:analog-stereo+input:multichannel-input=["analog-output"]
+bluez_card.2C_BA_CA_24_55_0F:input:headset-input={"channelMap":["MONO"], "channelVolumes":[1.000000], "mute":false}
+bluez_card.2C_BA_CA_24_55_0F:output:headset-hf-output={"channelMap":["MONO"], "channelVolumes":[1.000000], "mute":false}
+bluez_card.2C_BA_CA_24_55_0F:output:headset-output={"channelVolumes":[1.000000, 1.000000], "channelMap":["FL", "FR"], "mute":false, "latencyOffsetNsec":0}
+bluez_card.2C_BA_CA_24_55_0F:profile:a2dp-sink=["headset-output"]
+bluez_card.2C_BA_CA_24_55_0F:profile:headset-head-unit=["headset-input", "headset-hf-output"]
+bluez_card.2C_BA_CA_24_55_0F:profile:off=["headset-output"]
+bluez_card.B4_E7_B3_52_0C_8B:input:headset-input={"channelVolumes":[1.000000], "channelMap":["MONO"], "mute":false}
+bluez_card.B4_E7_B3_52_0C_8B:output:headset-hf-output={"channelVolumes":[0.064000], "channelMap":["MONO"], "mute":false}
+bluez_card.B4_E7_B3_52_0C_8B:output:headset-output={"channelMap":["FL", "FR"], "channelVolumes":[1.000000, 1.000000], "latencyOffsetNsec":0, "mute":false}
+bluez_card.B4_E7_B3_52_0C_8B:profile:a2dp-sink=["headset-output"]
+bluez_card.B4_E7_B3_52_0C_8B:profile:headset-head-unit=["headset-input", "headset-hf-output"]

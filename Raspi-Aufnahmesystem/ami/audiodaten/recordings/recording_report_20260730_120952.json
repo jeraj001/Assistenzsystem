@@ -1,0 +1,159 @@
+{
+    "generated_at": "2026-07-30T12:09:52.031763+02:00",
+    "problem_recording_count": 9,
+    "issues": [
+        {
+            "speech_file": "1462-170138-0005.flac",
+            "recording_id": "1462-170138-0005",
+            "noise_file": "ch15.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 60.075,
+            "stepper_2_angle": 150.075,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T10:55:43.502726+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "777-126732-0003.flac",
+            "recording_id": "777-126732-0003",
+            "noise_file": "ch11.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 60.075,
+            "stepper_2_angle": 180.0,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T10:58:25.296001+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "1272-128104-0003.flac",
+            "recording_id": "1272-128104-0003",
+            "noise_file": "ch14.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 60.075,
+            "stepper_2_angle": 180.0,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T10:59:14.706972+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "1272-128104-0002.flac",
+            "recording_id": "1272-128104-0002",
+            "noise_file": "ch13.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 90.0,
+            "stepper_2_angle": 60.075,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "Incomplete recording: expected at least 38353953 bytes, got 37478444 bytes",
+                    "time": "2026-07-30T11:03:06.650807+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "1462-170138-0006.flac",
+            "recording_id": "1462-170138-0006",
+            "noise_file": "ch16.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 90.0,
+            "stepper_2_angle": 60.075,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T11:03:57.047059+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "777-126732-0003.flac",
+            "recording_id": "777-126732-0003",
+            "noise_file": "ch11.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 150.075,
+            "stepper_2_angle": 90.0,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T11:40:32.983418+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "422-122949-0001.flac",
+            "recording_id": "422-122949-0001",
+            "noise_file": "ch07.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 150.075,
+            "stepper_2_angle": 150.075,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T11:46:47.207408+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "1462-170138-0005.flac",
+            "recording_id": "1462-170138-0005",
+            "noise_file": "ch15.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 180.0,
+            "stepper_2_angle": 119.925,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T12:02:14.258786+02:00"
+                }
+            ]
+        },
+        {
+            "speech_file": "1272-128104-0003.flac",
+            "recording_id": "1272-128104-0003",
+            "noise_file": "ch14.wav",
+            "pan_angle": 45.0,
+            "stepper_1_angle": 180.0,
+            "stepper_2_angle": 150.075,
+            "failed_attempts": 1,
+            "final_status": "recovered",
+            "attempt_errors": [
+                {
+                    "attempt": 1,
+                    "error": "arecord stopped unexpectedly with return code 1",
+                    "time": "2026-07-30T12:05:36.586224+02:00"
+                }
+            ]
+        }
+    ]
+}
