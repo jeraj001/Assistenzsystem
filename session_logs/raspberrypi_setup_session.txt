@@ -1,0 +1,2195 @@
+﻿Windows PowerShell 5.1
+Copyright (C) Microsoft Corporation. Alle Rechte vorbehalten.
+
+PS C:\Users\ekwug> ssh ami@raspberrypi.local
+The authenticity of host 'raspberrypi.local (fe80::da3a:ddff:fe54:2b14%21)' can't be established.
+ED25519 key fingerprint is SHA256:R4QRNNUipOvx+spqv9+XhlkWm/ML95jlI6O1sT6/RF4.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yea
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added 'raspberrypi.local' (ED25519) to the list of known hosts.
+ssh_dispatch_run_fatal: Connection to fe80::da3a:ddff:fe54:2b14%21 port 22: Connection timed out
+PS C:\Users\ekwug> ssh -4 ami@raspberrypi.local
+ssh: Could not resolve hostname raspberrypi.local: Der angegebene Host ist unbekannt.
+PS C:\Users\ekwug> ssh ami@192.168.137.246
+The authenticity of host '192.168.137.246 (192.168.137.246)' can't be established.
+ED25519 key fingerprint is SHA256:R4QRNNUipOvx+spqv9+XhlkWm/ML95jlI6O1sT6/RF4.
+This host key is known by the following other names/addresses:
+    C:\Users\ekwug/.ssh/known_hosts:2: raspberrypi.local
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '192.168.137.246' (ED25519) to the list of known hosts.
+ami@192.168.137.246's password:
+Linux raspberrypi 6.18.50+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.50-1+rpt1 (2026-09-11) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+ami@raspberrypi:~ $ sudo raspi-config nonint do_i2c 0
+[sudo] password for ami:
+ami@raspberrypi:~ $ sudo apt update
+Hit:1 http://deb.debian.org/debian trixie InRelease
+Hit:2 http://deb.debian.org/debian trixie-updates InRelease
+Get:3 http://deb.debian.org/debian-security trixie-security InRelease [43.4 kB]
+Get:4 http://archive.raspberrypi.com/debian trixie InRelease [54.9 kB]
+Get:5 http://archive.raspberrypi.com/debian trixie/main arm64 Packages [505 kB]
+Get:6 http://archive.raspberrypi.com/debian trixie/main armhf Packages [490 kB]
+Fetched 1,093 kB in 1s (1,708 kB/s)
+137 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ami@raspberrypi:~ $ sudo apt install -y sox libsox-fmt-all ffmpeg i2c-tools python3-pip python3-smbus python3-smbus2 python3-gpiozero python3-soundfile python3-sounddevice python3-numpy
+Error: Unable to locate package python3-sounddevice
+ami@raspberrypi:~ $ sudo apt update && sudo apt install -y sox libsox-fmt-all ffmpeg i2c-tools python3-pip python3-smbus python3-smbus2 python3-gpiozero python3-soundfile python3-numpy libportaudio2
+Hit:1 http://archive.raspberrypi.com/debian trixie InRelease
+Hit:2 http://deb.debian.org/debian trixie InRelease
+Hit:3 http://deb.debian.org/debian trixie-updates InRelease
+Hit:4 http://deb.debian.org/debian-security trixie-security InRelease
+137 packages can be upgraded. Run 'apt list --upgradable' to see them.
+ffmpeg is already the newest version (8:7.1.5-0+deb13u1+rpt2).
+ffmpeg set to manually installed.
+i2c-tools is already the newest version (4.4-2).
+i2c-tools set to manually installed.
+python3-pip is already the newest version (25.1.1+dfsg-1+rpt1).
+python3-pip set to manually installed.
+python3-smbus is already the newest version (4.4-2).
+python3-smbus set to manually installed.
+python3-smbus2 is already the newest version (0.4.3-1).
+python3-gpiozero is already the newest version (2.0.1-0+rpt1+trixie).
+python3-numpy is already the newest version (1:2.2.4+ds-1).
+python3-numpy set to manually installed.
+Installing:
+  libportaudio2  libsox-fmt-all  python3-soundfile  sox
+
+Installing dependencies:
+  libao-common     libsox-fmt-base  libsox-fmt-pulse  python3-pycparser
+  libao4           libsox-fmt-mp3   libsox3
+  libsox-fmt-alsa  libsox-fmt-opus  python3-cffi
+  libsox-fmt-ao    libsox-fmt-oss   python3-ply
+
+Suggested packages:
+  libaudio2  libsndio6.1  python-ply-doc
+
+Summary:
+  Upgrading: 0, Installing: 17, Removing: 0, Not Upgrading: 137
+  Download size: 1,085 kB
+  Space needed: 5,132 kB / 23.0 GB available
+
+Get:1 http://deb.debian.org/debian trixie/main arm64 libao-common all 1.2.2+20180113-1.2 [7,912 B]
+Get:2 http://deb.debian.org/debian trixie/main arm64 libao4 arm64 1.2.2+20180113-1.2 [32.6 kB]
+Get:3 http://deb.debian.org/debian trixie/main arm64 libportaudio2 arm64 19.6.0-1.2+b3 [58.8 kB]
+Get:4 http://deb.debian.org/debian trixie/main arm64 libsox3 arm64 14.4.2+git20190427-5+b3 [244 kB]
+Get:5 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-alsa arm64 14.4.2+git20190427-5+b3 [42.3 kB]
+Get:6 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-ao arm64 14.4.2+git20190427-5+b3 [39.4 kB]
+Get:7 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-base arm64 14.4.2+git20190427-5+b3 [63.7 kB]
+Get:8 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-mp3 arm64 14.4.2+git20190427-5+b3 [47.9 kB]
+Get:9 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-opus arm64 14.4.2+git20190427-5+b3 [39.7 kB]
+Get:10 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-oss arm64 14.4.2+git20190427-5+b3 [40.8 kB]
+Get:11 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-pulse arm64 14.4.2+git20190427-5+b3 [39.3 kB]
+Get:12 http://deb.debian.org/debian trixie/main arm64 libsox-fmt-all arm64 14.4.2+git20190427-5+b3 [36.9 kB]
+Get:13 http://deb.debian.org/debian trixie/main arm64 python3-ply all 3.11-9 [62.9 kB]
+Get:14 http://deb.debian.org/debian trixie/main arm64 python3-pycparser all 2.22-2 [78.0 kB]
+Get:15 http://deb.debian.org/debian trixie/main arm64 python3-cffi all 1.17.1-3 [89.5 kB]
+Get:16 http://deb.debian.org/debian trixie/main arm64 python3-soundfile all 0.13.1-2 [30.8 kB]
+Get:17 http://deb.debian.org/debian trixie/main arm64 sox arm64 14.4.2+git20190427-5+b3 [131 kB]
+Fetched 1,085 kB in 0s (2,594 kB/s)
+Selecting previously unselected package libao-common.
+(Reading database ... 121273 files and directories currently installed.)
+Preparing to unpack .../00-libao-common_1.2.2+20180113-1.2_all.deb ...
+Unpacking libao-common (1.2.2+20180113-1.2) ...
+Selecting previously unselected package libao4:arm64.
+Preparing to unpack .../01-libao4_1.2.2+20180113-1.2_arm64.deb ...
+Unpacking libao4:arm64 (1.2.2+20180113-1.2) ...
+Selecting previously unselected package libportaudio2:arm64.
+Preparing to unpack .../02-libportaudio2_19.6.0-1.2+b3_arm64.deb ...
+Unpacking libportaudio2:arm64 (19.6.0-1.2+b3) ...
+Selecting previously unselected package libsox3:arm64.
+Preparing to unpack .../03-libsox3_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox3:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-alsa:arm64.
+Preparing to unpack .../04-libsox-fmt-alsa_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-alsa:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-ao:arm64.
+Preparing to unpack .../05-libsox-fmt-ao_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-ao:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-base:arm64.
+Preparing to unpack .../06-libsox-fmt-base_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-base:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-mp3:arm64.
+Preparing to unpack .../07-libsox-fmt-mp3_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-mp3:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-opus:arm64.
+Preparing to unpack .../08-libsox-fmt-opus_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-opus:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-oss:arm64.
+Preparing to unpack .../09-libsox-fmt-oss_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-oss:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-pulse:arm64.
+Preparing to unpack .../10-libsox-fmt-pulse_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-pulse:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package libsox-fmt-all:arm64.
+Preparing to unpack .../11-libsox-fmt-all_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking libsox-fmt-all:arm64 (14.4.2+git20190427-5+b3) ...
+Selecting previously unselected package python3-ply.
+Preparing to unpack .../12-python3-ply_3.11-9_all.deb ...
+Unpacking python3-ply (3.11-9) ...
+Selecting previously unselected package python3-pycparser.
+Preparing to unpack .../13-python3-pycparser_2.22-2_all.deb ...
+Unpacking python3-pycparser (2.22-2) ...
+Selecting previously unselected package python3-cffi.
+Preparing to unpack .../14-python3-cffi_1.17.1-3_all.deb ...
+Unpacking python3-cffi (1.17.1-3) ...
+Selecting previously unselected package python3-soundfile.
+Preparing to unpack .../15-python3-soundfile_0.13.1-2_all.deb ...
+Unpacking python3-soundfile (0.13.1-2) ...
+Selecting previously unselected package sox.
+Preparing to unpack .../16-sox_14.4.2+git20190427-5+b3_arm64.deb ...
+Unpacking sox (14.4.2+git20190427-5+b3) ...
+Setting up libportaudio2:arm64 (19.6.0-1.2+b3) ...
+Setting up libsox3:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up python3-ply (3.11-9) ...
+Setting up libsox-fmt-oss:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up python3-pycparser (2.22-2) ...
+Setting up libao-common (1.2.2+20180113-1.2) ...
+Setting up libsox-fmt-alsa:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up libao4:arm64 (1.2.2+20180113-1.2) ...
+Setting up libsox-fmt-base:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up libsox-fmt-ao:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up libsox-fmt-mp3:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up libsox-fmt-opus:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up libsox-fmt-pulse:arm64 (14.4.2+git20190427-5+b3) ...
+Setting up python3-cffi (1.17.1-3) ...
+Setting up python3-soundfile (0.13.1-2) ...
+Setting up sox (14.4.2+git20190427-5+b3) ...
+Setting up libsox-fmt-all:arm64 (14.4.2+git20190427-5+b3) ...
+Processing triggers for libc-bin (2.41-12+rpt1+deb13u4) ...
+Processing triggers for man-db (2.13.1-1) ...
+Processing triggers for mailcap (3.74) ...
+ami@raspberrypi:~ $ pip3 install --break-system-packages sounddevice
+Defaulting to user installation because normal site-packages is not writeable
+Looking in indexes: https://pypi.org/simple, https://www.piwheels.org/simple
+Collecting sounddevice
+  Downloading https://www.piwheels.org/simple/sounddevice/sounddevice-0.5.6-py3-none-any.whl.metadata (1.4 kB)
+Requirement already satisfied: cffi in /usr/lib/python3/dist-packages (from sounddevice) (1.17.1)
+Requirement already satisfied: pycparser in /usr/lib/python3/dist-packages (from cffi->sounddevice) (2.22)
+Downloading https://www.piwheels.org/simple/sounddevice/sounddevice-0.5.6-py3-none-any.whl (32 kB)
+Installing collected packages: sounddevice
+Successfully installed sounddevice-0.5.6
+ami@raspberrypi:~ $ arecord -l
+i2cdetect -y 1
+**** List of CAPTURE Hardware Devices ****
+card 3: UMA16v2 [UMA16v2], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- 29 -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: 70 -- -- -- -- -- -- --
+ami@raspberrypi:~ $ grep -rnE "ami|lestileli|192\.168|scp|ssh|/home/" ~/testcode/*.py
+/home/ami/testcode/dual.py:12:RECORD_FILE = "/home/ami/record1.wav"
+/home/ami/testcode/dual.py:17:FILE_ANALOG = "/home/ami/record.wav"
+/home/ami/testcode/dual.py:18:FILE_BLUETOOTH = "/home/ami/test.wav"
+/home/ami/testcode/loudspeaker_2_audios.py:3:FILE_LEFT = "/home/ami/audio/Sprecher001_20250313_EinfacherBuchSatz1_BE26_mitStoergeraeusch_HintergrundGespraech_v1.wav"
+/home/ami/testcode/loudspeaker_2_audios.py:4:FILE_RIGHT = "/home/ami/audio/raspberrypi_python_record.wav"
+/home/ami/testcode/main.py:11:    "/home/ami/Pan-Tilt_HAT_code/"
+/home/ami/testcode/main_temp.py:10:    "/home/ami/Pan-Tilt_HAT_code/"
+/home/ami/testcode/motor+2audio.py:7:FILE_LEFT = "/home/ami/audio/Sprecher001_20250313_EinfacherBuchSatz1_BE26_mitStoergeraeusch_HintergrundGespraech_v1.wav"
+/home/ami/testcode/motor+2audio.py:8:FILE_RIGHT = "/home/ami/audio/raspberrypi_python_record.wav"
+/home/ami/testcode/motor.py:14:RECORD_FILE = "/home/ami/record1.wav"
+/home/ami/testcode/motor.py:19:FILE_ANALOG = "/home/ami/record.wav"
+/home/ami/testcode/motor.py:20:FILE_BLUETOOTH = "/home/ami/test.wav"
+/home/ami/testcode/realrecord_func.py:13:    "/home/ami/audiodaten/normalized_-32LUFS/LibriSpeech"
+/home/ami/testcode/realrecord_func.py:21:    "/home/ami/audiodaten/normalized_-32LUFS/OMEETING"
+/home/ami/testcode/realrecord_func.py:25:    "/home/ami/audiodaten/recordings"
+/home/ami/testcode/realrecord_func.py:66:WINDOWS_USER = "lestileli"
+/home/ami/testcode/realrecord_func.py:67:WINDOWS_HOST = "192.168.200.220"
+/home/ami/testcode/realrecord_func.py:80:    "/media/ami/TPU301"
+/home/ami/testcode/realrecord_func.py:904:        "scp",
+/home/ami/testcode/realrecord_func.py:1204:def transfer_condition_folder_ssh(
+/home/ami/testcode/realrecord_func.py:1224:    ssh_target = (
+/home/ami/testcode/realrecord_func.py:1230:        "ssh",
+/home/ami/testcode/realrecord_func.py:1233:        ssh_target,
+/home/ami/testcode/realrecord_func.py:1241:    scp_command = [
+/home/ami/testcode/realrecord_func.py:1242:        "scp",
+/home/ami/testcode/realrecord_func.py:1250:            f"{ssh_target}:"
+/home/ami/testcode/realrecord_func.py:1272:                scp_command
+/home/ami/testcode/realrecord_func.py:1454:    elif TRANSFER_MODE == "ssh":
+/home/ami/testcode/realrecord_func.py:1455:        transfer_condition_folder_ssh(
+/home/ami/testcode/realrecord.py:11:    "/home/ami/audiodaten/dev-clean/LibriSpeech/dev-clean"
+/home/ami/testcode/realrecord.py:15:    "/home/ami/audiodaten/OMEETING_16k/OMEETING"
+/home/ami/testcode/realrecord.py:19:    "/home/ami/audiodaten/recordings"
+/home/ami/testcode/realrecord.py:37:WINDOWS_USER = "lestileli"
+/home/ami/testcode/realrecord.py:38:WINDOWS_HOST = "192.168.200.220"
+/home/ami/testcode/realrecord.py:299:        "scp",
+/home/ami/testcode/realrecord_temp.py:4:    "/home/ami/audiodaten/OMEETING_16k/"
+/home/ami/testcode/realrecord_temp.py:9:"/home/ami/audiodaten/dev-clean/LibriSpeech/clean-database/84-121123-0003.flac"
+/home/ami/testcode/record_and_play.py:12:RECORD_FILE = "/home/ami/record1.wav"
+/home/ami/testcode/record_and_play.py:17:FILE_ANALOG = "/home/ami/record.wav"
+/home/ami/testcode/record_and_play.py:18:FILE_BLUETOOTH = "/home/ami/test.wav"
+ami@raspberrypi:~ $ client_loop: send disconnect: Connection reset
+PS C:\Users\ekwug> ssh ami@192.168.137.246
+ami@192.168.137.246's password:
+Linux raspberrypi 6.18.50+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.50-1+rpt1 (2026-09-11) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Nov 12 12:01:51 2026 from 192.168.137.1
+ami@raspberrypi:~ $ sudo tee /etc/NetworkManager/conf.d/wifi-powersave.conf << 'EOF'
+[connection]
+wifi.powersave = 2
+EOF
+[sudo] password for ami:
+[connection]
+wifi.powersave = 2
+ami@raspberrypi:~ $ nmcli -t -f NAME,TYPE con show --active
+netplan-wlan0-CHIDO 0493:802-11-wireless
+lo:loopback
+ami@raspberrypi:~ $ ssh-keygen
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/ami/.ssh/id_ed25519): ^[^[
+Enter passphrase for "mpty for no passphrase):
+
+ami@raspberrypi:~ $ ssh-keygen -t ed25519
+cat ~/.ssh/id_ed25519.pub
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/ami/.ssh/id_ed25519):
+Enter passphrase for "/home/ami/.ssh/id_ed25519" (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/ami/.ssh/id_ed25519
+Your public key has been saved in /home/ami/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:3iV0CILLHVZY+4mmkncILeIXuu3uz0llA4g4tRqbbdM ami@raspberrypi
+The key's randomart image is:
++--[ED25519 256]--+
+|  .  ..++        |
+| o o..+. o .     |
+|+ o..+... o .    |
+| B .o... + o     |
+|+ = E . S + .    |
+| o + = B o o     |
+|  o + = o .      |
+|   + = o         |
+|  .+=.+          |
++----[SHA256]-----+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCsSC58K9X3xZ7P21a9TjptBrbUh3MWL/dUDuUPauoo ami@raspberrypi
+ami@raspberrypi:~ $ cat ~/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCsSC58K9X3xZ7P21a9TjptBrbUh3MWL/dUDuUPauoo ami@raspberrypi
+ami@raspberrypi:~ $ ssh -o BatchMode=yes ekwug@192.168.137.1 "echo success"
+Host key verification failed.
+ami@raspberrypi:~ $ cat ~/.ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFCsSC58K9X3xZ7P21a9TjptBrbUh3MWL/dUDuUPauoo ami@raspberrypi
+ami@raspberrypi:~ $ ssh ekwug@192.168.137.1 "echo success"
+The authenticity of host '192.168.137.1 (192.168.137.1)' can't be established.
+ED25519 key fingerprint is SHA256:BZOi1ZflHeNZSYWkfp7NF0IJj6J7Dqz4ad7g4MqqnEY.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Please type 'yes', 'no' or the fingerprint: yes
+Warning: Permanently added '192.168.137.1' (ED25519) to the list of known hosts.
+success
+ami@raspberrypi:~ $ ssh -o BatchMode=yes ekwug@192.168.137.1 "echo success"
+success
+ami@raspberrypi:~ $ sed -n '55,95p' ~/testcode/realrecord_func.py
+
+PLAYBACK_BUFFER_TIME = 1000000
+PLAYBACK_PERIOD_TIME = 200000
+
+RECORD_BUFFER_TIME = 1000000
+RECORD_PERIOD_TIME = 200000
+
+RECORDING_DURATION_TOLERANCE = 0.25
+
+RECORDING_ISSUES = []
+
+WINDOWS_USER = "lestileli"
+WINDOWS_HOST = "192.168.200.220"
+WINDOWS_RECORDING_DIR = (
+    "Desktop/praktikum/audio/recordings"
+)
+
+TRANSFER_RETRIES = 3
+TRANSFER_RETRY_DELAY = 10
+DELETE_AFTER_TRANSFER = True
+
+
+TRANSFER_MODE = "usb"
+
+USB_MOUNT_POINT = Path(
+    "/media/ami/TPU301"
+)
+
+USB_RECORDING_ROOT = (
+    USB_MOUNT_POINT / "recordings"
+)
+
+SUPPORTED_AUDIO_EXTENSIONS = {
+    ".wav",
+    ".flac",
+    ".mp3",
+    ".ogg",
+    ".m4a",
+}
+
+def natural_sort_key(path):
+ami@raspberrypi:~ $ cp ~/testcode/realrecord_func.py ~/testcode/realrecord_func.py.bak && python3 -c '
+p = "/home/ami/testcode/realrecord_func.py"
+txt = open(p).read()
+txt = txt.replace("WINDOWS_USER = \"lestileli\"", "WINDOWS_USER = \"ekwug\"")
+txt = txt.replace("WINDOWS_HOST = \"192.168.200.220\"", "WINDOWS_HOST = \"192.168.137.1\"")
+txt = txt.replace("TRANSFER_MODE = \"usb\"", "TRANSFER_MODE = \"ssh\"")
+open(p, "w").write(txt)
+' && sed -n '65,80p' ~/testcode/realrecord_func.py
+
+WINDOWS_USER = "ekwug"
+WINDOWS_HOST = "192.168.137.1"
+WINDOWS_RECORDING_DIR = (
+    "Desktop/praktikum/audio/recordings"
+)
+
+TRANSFER_RETRIES = 3
+TRANSFER_RETRY_DELAY = 10
+DELETE_AFTER_TRANSFER = True
+
+
+TRANSFER_MODE = "ssh"
+
+USB_MOUNT_POINT = Path(
+    "/media/ami/TPU301"
+ami@raspberrypi:~ $ client_loop: send disconnect: Connection reset
+PS C:\Users\ekwug>  ssh ami@192.168.137.246
+ssh: connect to host 192.168.137.246 port 22: Connection timed out
+PS C:\Users\ekwug>
+PS C:\Users\ekwug> ^C
+PS C:\Users\ekwug>  ssh ami@192.168.137.246
+ssh: connect to host 192.168.137.246 port 22: Connection timed out
+PS C:\Users\ekwug>
+PS C:\Users\ekwug> USB_MOUNT_POINT = Path(
+>>     "/media/ami/TPU301"
+>> ami@raspberrypi:~ $ client_loop: send disconnect: Connection reset
+In Zeile:2 Zeichen:24
++     "/media/ami/TPU301"
++                        ~
+Schließende ")" fehlt in einem Ausdruck.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsError
+   RecordException
+    + FullyQualifiedErrorId : MissingEndParenthesisInExpression
+
+PS C:\Users\ekwug> PS C:\Users\ekwug>  ssh ami@192.168.137.246
+Get-Process : Es wurde kein Positionsparameter gefunden, der das
+Argument "ssh" akzeptiert.
+In Zeile:1 Zeichen:1
++ PS C:\Users\ekwug>  ssh ami@192.168.137.246
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-Process], Para
+   meterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.Po
+   werShell.Commands.GetProcessCommand
+
+PS C:\Users\ekwug> ssh: connect to host 192.168.137.246 port 22: Connection timed out
+ssh: : Die Benennung "ssh:" wurde nicht als Name eines Cmdlet, einer
+Funktion, einer Skriptdatei oder eines ausführbaren Programms erkannt.
+Überprüfen Sie die Schreibweise des Namens, oder ob der Pfad korrekt
+ist (sofern enthalten), und wiederholen Sie den Vorgang.
+In Zeile:1 Zeichen:1
++ ssh: connect to host 192.168.137.246 port 22: Connection timed out
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (ssh::String) [], Comman
+   dNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\ekwug> PS C:\Users\ekwug>
+PS : Es kann kein Prozess mit dem Namen "C:\Users\ekwug>" gefunden
+werden. Überprüfen Sie den Prozessnamen, und rufen Sie das Cmdlet
+erneut auf.
+In Zeile:1 Zeichen:1
++ PS C:\Users\ekwug>
++ ~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (C:\Users\ekwug>:String)
+    [Get-Process], ProcessCommandException
+    + FullyQualifiedErrorId : NoProcessFoundForGivenName,Microsoft.Pow
+   erShell.Commands.GetProcessCommand
+
+PS C:\Users\ekwug> PS C:\Users\ekwug> ^C
+Get-Process : Es wurde kein Positionsparameter gefunden, der das
+Argument "^C" akzeptiert.
+In Zeile:1 Zeichen:1
++ PS C:\Users\ekwug> ^C
++ ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-Process], Para
+   meterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.Po
+   werShell.Commands.GetProcessCommand
+
+PS C:\Users\ekwug> PS C:\Users\ekwug>  ssh ami@192.168.137.246
+Get-Process : Es wurde kein Positionsparameter gefunden, der das
+Argument "ssh" akzeptiert.
+In Zeile:1 Zeichen:1
++ PS C:\Users\ekwug>  ssh ami@192.168.137.246
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidArgument: (:) [Get-Process], Para
+   meterBindingException
+    + FullyQualifiedErrorId : PositionalParameterNotFound,Microsoft.Po
+   werShell.Commands.GetProcessCommand
+
+PS C:\Users\ekwug> ssh: connect to host 192.168.137.246 port 22: Connection timed out
+ssh: : Die Benennung "ssh:" wurde nicht als Name eines Cmdlet, einer
+Funktion, einer Skriptdatei oder eines ausführbaren Programms erkannt.
+Überprüfen Sie die Schreibweise des Namens, oder ob der Pfad korrekt
+ist (sofern enthalten), und wiederholen Sie den Vorgang.
+In Zeile:1 Zeichen:1
++ ssh: connect to host 192.168.137.246 port 22: Connection timed out
++ ~~~~
+    + CategoryInfo          : ObjectNotFound: (ssh::String) [], Comman
+   dNotFoundException
+    + FullyQualifiedErrorId : CommandNotFoundException
+
+PS C:\Users\ekwug>  ssh ami@192.168.137.246
+ami@192.168.137.246's password:
+Linux raspberrypi 6.18.50+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.50-1+rpt1 (2026-09-11) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Nov 12 12:46:55 2026 from 192.168.137.1
+ami@raspberrypi:~ $ sudo tee /etc/NetworkManager/conf.d/wifi-powersave.conf << 'EOF'
+[connection]
+wifi.powersave = 2
+EOF
+sudo nmcli radio wifi off && sudo nmcli radio wifi on
+[sudo] password for ami:
+[connection]
+wifi.powersave = 2
+ami@raspberrypi:~ $ cp ~/testcode/realrecord_func.py ~/testcode/realrecord_func.py.bak && python3 -c '
+p = "/home/ami/testcode/realrecord_func.py"
+txt = open(p).read()
+txt = txt.replace("WINDOWS_USER = \"lestileli\"", "WINDOWS_USER = \"ekwug\"")
+txt = txt.replace("WINDOWS_HOST = \"192.168.200.220\"", "WINDOWS_HOST = \"192.168.137.1\"")
+txt = txt.replace("TRANSFER_MODE = \"usb\"", "TRANSFER_MODE = \"ssh\"")
+open(p, "w").write(txt)
+' && sed -n '65,80p' ~/testcode/realrecord_func.py && i2cdetect -y 1 && arecord -l
+
+WINDOWS_USER = "ekwug"
+WINDOWS_HOST = "192.168.137.1"
+WINDOWS_RECORDING_DIR = (
+    "Desktop/praktikum/audio/recordings"
+)
+
+TRANSFER_RETRIES = 3
+TRANSFER_RETRY_DELAY = 10
+DELETE_AFTER_TRANSFER = True
+
+
+TRANSFER_MODE = "ssh"
+
+USB_MOUNT_POINT = Path(
+    "/media/ami/TPU301"
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- 29 -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: 70 -- -- -- -- -- -- --
+**** List of CAPTURE Hardware Devices ****
+card 3: UMA16v2 [UMA16v2], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+ami@raspberrypi:~ $ sed -n '65,80p' ~/testcode/realrecord_func.py && i2cdetect -y 1 && arecord -l
+
+WINDOWS_USER = "ekwug"
+WINDOWS_HOST = "192.168.137.1"
+WINDOWS_RECORDING_DIR = (
+    "Desktop/praktikum/audio/recordings"
+)
+
+TRANSFER_RETRIES = 3
+TRANSFER_RETRY_DELAY = 10
+DELETE_AFTER_TRANSFER = True
+
+
+TRANSFER_MODE = "ssh"
+
+USB_MOUNT_POINT = Path(
+    "/media/ami/TPU301"
+     0  1  2  3  4  5  6  7  8  9  a  b  c  d  e  f
+00:                         -- -- -- -- -- -- -- --
+10: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+20: -- -- -- -- -- -- -- -- -- 29 -- -- -- -- -- --
+30: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+40: 40 -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+50: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+60: -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+70: 70 -- -- -- -- -- -- --
+**** List of CAPTURE Hardware Devices ****
+card 3: UMA16v2 [UMA16v2], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+ami@raspberrypi:~ $ ^C
+ami@raspberrypi:~ $ ^C
+ami@raspberrypi:~ $ sed -n '1,54p' ~/testcode/realrecord_func.py && tail -n 45 ~/testcode/realrecord_func.py && aplay -l
+import math
+import os
+import re
+import shutil
+import signal
+import subprocess
+import time
+from pathlib import Path
+import json
+from datetime import datetime
+
+SPEECH_ROOT = Path(
+    "/home/ami/audiodaten/normalized_-32LUFS/LibriSpeech"
+)
+
+TRANSCRIPT_FILE = (
+    SPEECH_ROOT / "transcript.txt"
+)
+
+NOISE_ROOT = Path(
+    "/home/ami/audiodaten/normalized_-32LUFS/OMEETING"
+)
+
+RECORDING_ROOT = Path(
+    "/home/ami/audiodaten/recordings"
+)
+
+TEMP_ROOT = Path(
+    "/dev/shm/clean_recording"
+)
+
+BATCH_COUNTER_FILE = (
+    RECORDING_ROOT / ".next_batch_number"
+)
+
+AUDIO_DEVICE = "plughw:CARD=Headphones,DEV=0"
+
+RECORD_DEVICE = "hw:CARD=UMA16v2,DEV=0"
+RECORD_CHANNELS = 16
+RECORD_SAMPLERATE = 48000
+RECORD_FORMAT = "S32_LE"
+
+PLAYBACK_SAMPLERATE = 44100
+PLAYBACK_BITS = 16
+LEFT_VOLUME = 0.4
+RIGHT_VOLUME = 1.0
+
+PRE_RECORDING_TIME = 0.5
+POST_RECORDING_TIME = 0.2
+RECORDING_RETRIES = 5
+RECORDING_RETRY_DELAY = 2
+
+WARMUP_RETRIES = 3
+WARMUP_DURATION = 2
+        f"Recording report saved: "
+        f"{report_file}",
+        flush=True,
+    )
+
+    return report_file
+
+def main():
+
+    stepper1_angle = 90.0
+    stepper2_angle = 60.0
+    pan_angle = 0.0
+
+
+    wait_for_start_signal()
+
+    try:
+        record_clean_database(
+            stepper1_angle=stepper1_angle,
+            stepper2_angle=stepper2_angle,
+            pan_angle=pan_angle,
+        )
+
+    except KeyboardInterrupt:
+        print("", flush=True)
+        print(
+            "Recording interrupted by user.",
+            flush=True,
+        )
+
+    except Exception as error:
+        print("", flush=True)
+        print(
+            f"Recording failed: {error}",
+            flush=True,
+        )
+        raise
+
+    finally:
+        if RECORDING_ISSUES:
+            write_recording_report()
+
+
+if __name__ == "__main__":
+    main()
+**** List of PLAYBACK Hardware Devices ****
+card 0: vc4hdmi0 [vc4-hdmi-0], device 0: MAI PCM i2s-hifi-0 [MAI PCM i2s-hifi-0]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 1: vc4hdmi1 [vc4-hdmi-1], device 0: MAI PCM i2s-hifi-0 [MAI PCM i2s-hifi-0]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+card 2: Headphones [bcm2835 Headphones], device 0: bcm2835 Headphones [bcm2835 Headphones]
+  Subdevices: 8/8
+  Subdevice #0: subdevice #0
+  Subdevice #1: subdevice #1
+  Subdevice #2: subdevice #2
+  Subdevice #3: subdevice #3
+  Subdevice #4: subdevice #4
+  Subdevice #5: subdevice #5
+  Subdevice #6: subdevice #6
+  Subdevice #7: subdevice #7
+card 3: UMA16v2 [UMA16v2], device 0: USB Audio [USB Audio]
+  Subdevices: 1/1
+  Subdevice #0: subdevice #0
+ami@raspberrypi:~ $ cp ~/testcode/realrecord.py ~/testcode/realrecord.py.bak && python3 -c '
+p = "/home/ami/testcode/realrecord.py"
+txt = open(p).read()
+txt = txt.replace("WINDOWS_USER = \"lestileli\"", "WINDOWS_USER = \"ekwug\"")
+txt = txt.replace("WINDOWS_HOST = \"192.168.200.220\"", "WINDOWS_HOST = \"192.168.137.1\"")
+open(p, "w").write(txt)
+' && sed -n '35,42p' ~/testcode/realrecord.py
+POST_RECORDING_TIME = 0.5
+
+WINDOWS_USER = "ekwug"
+WINDOWS_HOST = "192.168.137.1"
+WINDOWS_RECORDING_DIR = (
+    "Desktop/praktikum/audio/recordings"
+)
+
+ami@raspberrypi:~ $ ls -la /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech /home/ami/audiodaten/normalized_-32LUFS/OMEETING && cat ~/testcode/main.py
+/home/ami/audiodaten/normalized_-32LUFS/LibriSpeech:
+total 696
+drwx------ 2 ami ami   4096 Nov 12 12:52 .
+drwx------ 4 ami ami   4096 Nov 12 12:52 ..
+-rw-rw-r-- 1 ami ami  96594 Nov 12 12:52 1272-128104-0000.flac
+-rw-rw-r-- 1 ami ami  76616 Nov 12 12:52 1272-128104-0001.flac
+-rw-rw-r-- 1 ami ami 207484 Nov 12 12:52 1272-128104-0002.flac
+-rw-rw-r-- 1 ami ami 160035 Nov 12 12:52 1272-128104-0003.flac
+-rw-rw-r-- 1 ami ami 149564 Nov 12 12:52 1272-128104-0005.flac
+-rw-rw-r-- 1 ami ami    655 Nov 12 12:52 transcript.txt
+
+/home/ami/audiodaten/normalized_-32LUFS/OMEETING:
+total 150024
+drwx------ 2 ami ami    4096 Nov 12 12:52 .
+drwx------ 4 ami ami    4096 Nov 12 12:52 ..
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch01.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch02.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch03.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch04.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch05.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch06.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch07.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch08.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch09.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch10.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch11.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch12.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch13.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch14.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch15.wav
+-rw-rw-r-- 1 ami ami 9600172 Nov 12 12:52 ch16.wav
+import sys
+import time
+from pathlib import Path
+
+import stepper
+import stepper2
+import realrecord_func
+
+
+PAN_TILT_DIR = Path(
+    "/home/ami/Pan-Tilt_HAT_code/"
+    "RaspberryPi/Servo_Driver/python"
+)
+
+sys.path.insert(
+    0,
+    str(PAN_TILT_DIR),
+)
+
+import ttt
+
+CURRENT_PAN_DATASET_ANGLE = 0
+
+PAN_TARGETS = [
+    0,
+    -45,
+    45,
+]
+
+STEPPER_TARGETS = [
+    60,
+    90,
+    120,
+    150,
+    180,
+]
+
+START_CONDITION = (
+    0,
+    60,
+    60,
+)
+
+ANGLE_TOLERANCE = 2.0
+
+def initialize_pan_reference(
+    current_dataset_pan_angle,
+):
+    current_physical_pan_angle = (
+        current_dataset_pan_angle + 90
+    )
+
+    if not (
+        0
+        <= current_physical_pan_angle
+        <= 180
+    ):
+        raise ValueError(
+            f"Invalid current dataset "
+            f"pan angle: "
+            f"{current_dataset_pan_angle}"
+        )
+
+    ttt.current_angles[0] = (
+        current_physical_pan_angle
+    )
+
+    ttt.pwm.setRotationAngle(
+        0,
+        current_physical_pan_angle,
+    )
+
+    print(
+        f"Pan software reference "
+        f"initialized: "
+        f"dataset="
+        f"{current_dataset_pan_angle:.2f}, "
+        f"control="
+        f"{current_physical_pan_angle:.2f}",
+        flush=True,
+    )
+
+    time.sleep(0.5)
+
+def move_motor(
+    motor,
+    angle,
+    clockwise,
+):
+    print(
+        f"Moving motor by "
+        f"{angle:.2f} degrees, "
+        f"clockwise={clockwise}",
+        flush=True,
+    )
+
+    motor.move_angle(
+        angle,
+        clockwise=clockwise,
+    )
+
+    time.sleep(1)
+
+def get_dataset_angles():
+    raw_stepper1_angle = (
+        stepper.get_current_angle()
+    )
+
+    raw_stepper2_angle = (
+        stepper2.get_current_angle()
+    )
+
+    dataset_stepper1_angle = (
+        90 - raw_stepper1_angle
+    )
+
+    dataset_stepper2_angle = (
+        90 + raw_stepper2_angle
+    )
+
+    print(
+        f"Stepper 1 raw angle: "
+        f"{raw_stepper1_angle:.2f}",
+        flush=True,
+    )
+
+    print(
+        f"Stepper 2 raw angle: "
+        f"{raw_stepper2_angle:.2f}",
+        flush=True,
+    )
+
+    print(
+        f"Dataset stepper 1 angle: "
+        f"{dataset_stepper1_angle:.2f}",
+        flush=True,
+    )
+
+    print(
+        f"Dataset stepper 2 angle: "
+        f"{dataset_stepper2_angle:.2f}",
+        flush=True,
+    )
+
+    return (
+        dataset_stepper1_angle,
+        dataset_stepper2_angle,
+    )
+
+
+def verify_angle(
+    actual_angle,
+    expected_angle,
+    angle_name,
+):
+    difference = abs(
+        actual_angle - expected_angle
+    )
+
+    if difference > ANGLE_TOLERANCE:
+        raise RuntimeError(
+            f"{angle_name} angle mismatch: "
+            f"expected {expected_angle:.2f}, "
+            f"got {actual_angle:.2f}"
+        )
+
+def initialize_stepper_references():
+    stepper.set_current_angle(
+        0
+    )
+
+    stepper2.set_current_angle(
+        0
+    )
+
+    (
+        dataset_stepper1_angle,
+        dataset_stepper2_angle,
+    ) = get_dataset_angles()
+
+    verify_angle(
+        actual_angle=dataset_stepper1_angle,
+        expected_angle=90,
+        angle_name=(
+            "Stepper 1 initial reference"
+        ),
+    )
+
+    verify_angle(
+        actual_angle=dataset_stepper2_angle,
+        expected_angle=90,
+        angle_name=(
+            "Stepper 2 initial reference"
+        ),
+    )
+
+    print(
+        "Stepper software references "
+        "initialized at dataset "
+        "position (90, 90).",
+        flush=True,
+    )
+
+
+def move_pan_to_dataset_angle(
+    dataset_pan_angle,
+):
+    physical_pan_angle = (
+        dataset_pan_angle + 90
+    )
+
+    if not 0 <= physical_pan_angle <= 180:
+        raise ValueError(
+            f"Invalid dataset pan angle: "
+            f"{dataset_pan_angle}"
+        )
+
+    print(
+        f"Moving pan to physical "
+        f"{physical_pan_angle:.2f} degrees, "
+        f"dataset angle "
+        f"{dataset_pan_angle:.2f} degrees.",
+        flush=True,
+    )
+
+    ttt.move_pan(
+        physical_pan_angle
+    )
+
+    time.sleep(1)
+
+    return physical_pan_angle
+
+def move_steppers_to(
+    target_stepper1_angle,
+    target_stepper2_angle,
+):
+    (
+        current_stepper1_angle,
+        current_stepper2_angle,
+    ) = get_dataset_angles()
+
+    stepper1_difference = (
+        target_stepper1_angle
+        - current_stepper1_angle
+    )
+
+    if abs(stepper1_difference) > (
+        ANGLE_TOLERANCE
+    ):
+        move_motor(
+            motor=stepper,
+            angle=abs(
+                stepper1_difference
+            ),
+            clockwise=(
+                stepper1_difference < 0
+            ),
+        )
+
+    stepper2_difference = (
+        target_stepper2_angle
+        - current_stepper2_angle
+    )
+
+    if abs(stepper2_difference) > (
+        ANGLE_TOLERANCE
+    ):
+        move_motor(
+            motor=stepper2,
+            angle=abs(
+                stepper2_difference
+            ),
+            clockwise=(
+                stepper2_difference > 0
+            ),
+        )
+
+    (
+        actual_stepper1_angle,
+        actual_stepper2_angle,
+    ) = get_dataset_angles()
+
+    verify_angle(
+        actual_angle=actual_stepper1_angle,
+        expected_angle=target_stepper1_angle,
+        angle_name="Stepper 1 target",
+    )
+
+    verify_angle(
+        actual_angle=actual_stepper2_angle,
+        expected_angle=target_stepper2_angle,
+        angle_name="Stepper 2 target",
+    )
+
+def record_current_condition(
+    physical_pan_angle,
+    expected_stepper1_angle,
+    expected_stepper2_angle,
+):
+    (
+        dataset_stepper1_angle,
+        dataset_stepper2_angle,
+    ) = get_dataset_angles()
+
+    verify_angle(
+        actual_angle=dataset_stepper1_angle,
+        expected_angle=expected_stepper1_angle,
+        angle_name="Stepper 1",
+    )
+
+    verify_angle(
+        actual_angle=dataset_stepper2_angle,
+        expected_angle=expected_stepper2_angle,
+        angle_name="Stepper 2",
+    )
+
+    dataset_pan_angle = (
+        physical_pan_angle - 90
+    )
+
+    print("", flush=True)
+    print("=" * 70, flush=True)
+
+    print(
+        f"Starting recording: "
+        f"pan={dataset_pan_angle:.2f}, "
+        f"speaker1="
+        f"{dataset_stepper1_angle:.2f}, "
+        f"speaker2="
+        f"{dataset_stepper2_angle:.2f}",
+        flush=True,
+    )
+
+    print("=" * 70, flush=True)
+
+    realrecord_func.record_clean_database(
+        stepper1_angle=(
+            dataset_stepper1_angle
+        ),
+        stepper2_angle=(
+            dataset_stepper2_angle
+        ),
+        pan_angle=dataset_pan_angle,
+    )
+
+
+def build_recording_conditions():
+    return [
+        (
+            pan_angle,
+            stepper1_angle,
+            stepper2_angle,
+        )
+        for pan_angle in PAN_TARGETS
+        for stepper1_angle in STEPPER_TARGETS
+        for stepper2_angle in STEPPER_TARGETS
+    ]
+
+def run_from_condition(start_condition):
+    conditions = build_recording_conditions()
+
+    if start_condition not in conditions:
+        raise ValueError(
+            f"Invalid start condition: "
+            f"{start_condition}"
+        )
+
+    start_index = conditions.index(
+        start_condition
+    )
+
+    current_pan_dataset_angle = (
+        CURRENT_PAN_DATASET_ANGLE
+    )
+
+    for (
+        target_pan_angle,
+        target_stepper1_angle,
+        target_stepper2_angle,
+    ) in conditions[start_index:]:
+        move_steppers_to(
+            target_stepper1_angle=(
+                target_stepper1_angle
+            ),
+            target_stepper2_angle=(
+                target_stepper2_angle
+            ),
+        )
+
+        if (
+            target_pan_angle
+            != current_pan_dataset_angle
+        ):
+            physical_pan_angle = (
+                move_pan_to_dataset_angle(
+                    target_pan_angle
+                )
+            )
+
+            current_pan_dataset_angle = (
+                target_pan_angle
+            )
+        else:
+            physical_pan_angle = (
+                target_pan_angle + 90
+            )
+
+        record_current_condition(
+            physical_pan_angle=(
+                physical_pan_angle
+            ),
+            expected_stepper1_angle=(
+                target_stepper1_angle
+            ),
+            expected_stepper2_angle=(
+                target_stepper2_angle
+            ),
+        )
+
+def main():
+    ttt.initialize()
+
+    try:
+        initialize_stepper_references()
+
+        initialize_pan_reference(CURRENT_PAN_DATASET_ANGLE)
+
+        time.sleep(3)
+
+        run_from_condition(
+            START_CONDITION
+        )
+
+        print(
+            "All requested recording "
+            "conditions completed.",
+            flush=True,
+        )
+
+    except KeyboardInterrupt:
+        print(
+            "\nProgram interrupted.",
+            flush=True,
+        )
+
+    except Exception as error:
+        print(
+            f"\nProgram failed: {error}",
+            flush=True,
+        )
+
+        raise
+
+    finally:
+        try:
+            realrecord_func.write_recording_report()
+
+        except Exception as report_error:
+            print(
+                f"Failed to write recording "
+                f"report: {report_error}",
+                flush=True,
+            )
+
+        ttt.cleanup(
+            return_to_initial=False
+        )
+
+
+if __name__ == "__main__":
+    main()
+ami@raspberrypi:~ $ cat ~/testcode/stepper.py ~/testcode/stepper2.py
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 16
+DIR_PIN = 26
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 20
+DIR_PIN = 21
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+ami@raspberrypi:~ $ cat ~/testcode/stepper.py ~/testcode/stepper2.py
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 16
+DIR_PIN = 26
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 20
+DIR_PIN = 21
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+ami@raspberrypi:~ $ client_loop: send disconnect: Connection reset
+PS C:\Users\ekwug>  ssh ami@192.168.137.246
+ami@192.168.137.246's password:
+Linux raspberrypi 6.18.50+rpt-rpi-v8 #1 SMP PREEMPT Debian 1:6.18.50-1+rpt1 (2026-09-11) aarch64
+
+The programs included with the Debian GNU/Linux system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
+permitted by applicable law.
+Last login: Thu Nov 12 15:52:37 2026 from 192.168.137.1
+ami@raspberrypi:~ $ cat ~/testcode/stepper.py ~/testcode/stepper2.py
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 16
+DIR_PIN = 26
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 20
+DIR_PIN = 21
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+ami@raspberrypi:~ $ cd ~/testcode && python3 realrecord_func.py
+
+System ready. Press Enter to start.
+
+Recording device warm-up 1/3
+Running command:
+arecord -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t raw -d 2 /dev/null
+Recording raw data '/dev/null' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Recording device warm-up completed.
+
+======================================================================
+Speech files found: 5
+Noise files found: 16
+Transcripts found: 5
+Noise dataset: normalized--32LUFS
+Microphone angle: 0.00
+Condition folder: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060
+======================================================================
+
+======================================================================
+Recording 1/5
+Speech: 1272-128104-0000.flac
+Noise file: ch01.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0000.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0001_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch01.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0001_noise.wav repeat 1000 trim 0 5.855011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0001_noise.wav -v 1.0 /dev/shm/clean_recording/0001_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0001_stereo.wav
+Playback duration: 5.86 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0000.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0000.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0001_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0001_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Recording attempt 1/5 failed: Incomplete recording: expected at least 17986593 bytes, got 14139244 bytes
+
+======================================================================
+Recording 1/5
+Speech: 1272-128104-0000.flac
+Noise file: ch01.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0000.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0001_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch01.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0001_noise.wav repeat 1000 trim 0 5.855011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0001_noise.wav -v 1.0 /dev/shm/clean_recording/0001_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0001_stereo.wav
+Playback duration: 5.86 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0000.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0000.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0001_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0001_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0000.wav
+Recorded duration: 6.60 seconds
+File size: 20284076 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0000-metadata.json
+
+======================================================================
+Recording 2/5
+Speech: 1272-128104-0001.flac
+Noise file: ch02.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0001.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0002_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch02.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0002_noise.wav repeat 1000 trim 0 4.815011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0002_noise.wav -v 1.0 /dev/shm/clean_recording/0002_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0002_stereo.wav
+Playback duration: 4.82 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0001.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0001.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0002_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0002_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0001.wav
+Recorded duration: 5.60 seconds
+File size: 17211692 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0001-metadata.json
+
+======================================================================
+Recording 3/5
+Speech: 1272-128104-0002.flac
+Noise file: ch03.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0002.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0003_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch03.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0003_noise.wav repeat 1000 trim 0 12.485011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0003_noise.wav -v 1.0 /dev/shm/clean_recording/0003_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0003_stereo.wav
+Playback duration: 12.49 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0002.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0002.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0003_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0003_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0002.wav
+Recorded duration: 13.20 seconds
+File size: 40558892 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0002-metadata.json
+
+======================================================================
+Recording 4/5
+Speech: 1272-128104-0003.flac
+Noise file: ch04.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0003.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0004_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch04.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0004_noise.wav repeat 1000 trim 0 9.9
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0004_noise.wav -v 1.0 /dev/shm/clean_recording/0004_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0004_stereo.wav
+Playback duration: 9.90 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0003.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0003.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0004_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0004_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0003.wav
+Recorded duration: 10.60 seconds
+File size: 32570668 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0003-metadata.json
+
+======================================================================
+Recording 5/5
+Speech: 1272-128104-0005.flac
+Noise file: ch05.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0005.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0005_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch05.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0005_noise.wav repeat 1000 trim 0 9.01
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0005_noise.wav -v 1.0 /dev/shm/clean_recording/0005_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0005_stereo.wav
+Playback duration: 9.01 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0005.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0005.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0005_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0005_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0005.wav
+Recorded duration: 9.80 seconds
+File size: 30112748 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060/1272-128104-0005-metadata.json
+
+All recordings completed.
+Transfer attempt 1/3
+Running command:
+ssh -o BatchMode=yes -o ConnectTimeout=15 ekwug@192.168.137.1 cmd /c if not exist "Desktop\praktikum\audio\recordings\noise_normalized--32LUFS\mic_p000" mkdir "Desktop\praktikum\audio\recordings\noise_normalized--32LUFS\mic_p000"
+Running command:
+scp -r -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060 ekwug@192.168.137.1:Desktop/praktikum/audio/recordings/noise_normalized--32LUFS/mic_p000/
+Transfer completed: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p090_s2_p060
+All operations completed successfully.
+Recording report saved: /home/ami/audiodaten/recordings/recording_report_20261112_162156.json
+ami@raspberrypi:~/testcode $ python3 -c '
+import sys
+sys.path.insert(0, "/home/ami/Pan-Tilt_HAT_code/RaspberryPi/Servo_Driver/python")
+import ttt
+ttt.initialize()
+ttt.pwm.setRotationAngle(0, 90)
+'
+ami@raspberrypi:~/testcode $ cat ~/testcode/stepper.py ~/testcode/stepper2.py
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 16
+DIR_PIN = 26
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+from gpiozero import OutputDevice
+import time
+from time import sleep
+
+STEP_PIN = 20
+DIR_PIN = 21
+
+PULSES_PER_REV = 1600
+DEFAULT_STEP_DELAY = 0.05
+PULSE_WIDTH = 0.0005
+
+step = OutputDevice(STEP_PIN)
+direction = OutputDevice(DIR_PIN)
+current_position_steps = 0
+
+
+def move_steps(steps, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    global current_position_steps
+
+    direction.value = 1 if clockwise else 0
+    sleep(0.1)
+
+    for _ in range(steps):
+        step.on()
+        sleep(PULSE_WIDTH)
+        step.off()
+        sleep(step_delay)
+
+        if clockwise:
+            current_position_steps += 1
+        else:
+            current_position_steps -= 1
+
+
+def move_angle(angle_deg, clockwise=True, step_delay=DEFAULT_STEP_DELAY):
+    steps = round(PULSES_PER_REV * angle_deg / 360)
+
+    print(f"{angle_deg} degrees = {steps} pulses", flush=True)
+
+    move_steps(
+        steps=steps,
+        clockwise=clockwise,
+        step_delay=step_delay,
+    )
+
+def get_current_angle():
+    return current_position_steps * 360 / PULSES_PER_REV
+
+def set_current_angle(angle):
+    global current_position_steps
+
+    current_position_steps = round(
+        float(angle)
+        / 360.0
+        * PULSES_PER_REV
+    )
+
+def main():
+
+        try:
+                time.sleep(3)
+                move_angle(15, clockwise=True)
+                time.sleep(3)
+                move_angle(15, clockwise=False)
+
+
+        except KeyboardInterrupt:
+                print("\nProgram interrupted.", flush=True)
+
+
+if __name__ == "__main__":
+    main()
+ami@raspberrypi:~/testcode $ python3 ~/testcode/stepper.py
+15 degrees = 67 pulses
+15 degrees = 67 pulses
+ami@raspberrypi:~/testcode $ python3 ~/testcode/stepper.py
+15 degrees = 67 pulses
+15 degrees = 67 pulses
+ami@raspberrypi:~/testcode $ python3 ~/testcode/stepper.py
+15 degrees = 67 pulses
+15 degrees = 67 pulses
+ami@raspberrypi:~/testcode $ python3 ~/testcode/stepper.py
+15 degrees = 67 pulses
+15 degrees = 67 pulses
+ami@raspberrypi:~/testcode $ python3 ~/testcode/stepper2.py
+15 degrees = 67 pulses
+15 degrees = 67 pulses
+ami@raspberrypi:~/testcode $ python3 ~/testcode/stepper.py
+15 degrees = 67 pulses
+15 degrees = 67 pulses
+ami@raspberrypi:~/testcode $ cd ~/testcode && python3 -c '
+import time, main
+main.ttt.initialize()
+try:
+    main.initialize_stepper_references()
+    main.initialize_pan_reference(0)
+    time.sleep(3)
+    main.move_steppers_to(60, 60)
+    main.record_current_condition(90, 60, 60)
+    print("Single-condition test sweep completed cleanly!", flush=True)
+finally:
+    main.ttt.cleanup(return_to_initial=False)
+'
+Stepper 1 raw angle: 0.00
+Stepper 2 raw angle: 0.00
+Dataset stepper 1 angle: 90.00
+Dataset stepper 2 angle: 90.00
+Stepper software references initialized at dataset position (90, 90).
+Pan software reference initialized: dataset=0.00, control=90.00
+Stepper 1 raw angle: 0.00
+Stepper 2 raw angle: 0.00
+Dataset stepper 1 angle: 90.00
+Dataset stepper 2 angle: 90.00
+Moving motor by 30.00 degrees, clockwise=True
+30.0 degrees = 133 pulses
+Moving motor by 30.00 degrees, clockwise=False
+30.0 degrees = 133 pulses
+Stepper 1 raw angle: 29.93
+Stepper 2 raw angle: -29.93
+Dataset stepper 1 angle: 60.08
+Dataset stepper 2 angle: 60.08
+Stepper 1 raw angle: 29.93
+Stepper 2 raw angle: -29.93
+Dataset stepper 1 angle: 60.08
+Dataset stepper 2 angle: 60.08
+
+======================================================================
+Starting recording: pan=0.00, speaker1=60.08, speaker2=60.08
+======================================================================
+Recording device warm-up 1/3
+Running command:
+arecord -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t raw -d 2 /dev/null
+Recording raw data '/dev/null' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Recording device warm-up completed.
+
+======================================================================
+Speech files found: 5
+Noise files found: 16
+Transcripts found: 5
+Noise dataset: normalized--32LUFS
+Microphone angle: 0.00
+Condition folder: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060
+======================================================================
+
+======================================================================
+Recording 1/5
+Speech: 1272-128104-0000.flac
+Noise file: ch01.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0000.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0001_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch01.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0001_noise.wav repeat 1000 trim 0 5.855011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0001_noise.wav -v 1.0 /dev/shm/clean_recording/0001_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0001_stereo.wav
+Playback duration: 5.86 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0000.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0000.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0001_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0001_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0000.wav
+Recorded duration: 6.60 seconds
+File size: 20284140 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0000-metadata.json
+
+======================================================================
+Recording 2/5
+Speech: 1272-128104-0001.flac
+Noise file: ch02.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0001.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0002_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch02.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0002_noise.wav repeat 1000 trim 0 4.815011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0002_noise.wav -v 1.0 /dev/shm/clean_recording/0002_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0002_stereo.wav
+Playback duration: 4.82 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0001.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0001.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0002_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0002_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0001.wav
+Recorded duration: 5.60 seconds
+File size: 17211692 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0001-metadata.json
+
+======================================================================
+Recording 3/5
+Speech: 1272-128104-0002.flac
+Noise file: ch03.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0002.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0003_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch03.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0003_noise.wav repeat 1000 trim 0 12.485011
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0003_noise.wav -v 1.0 /dev/shm/clean_recording/0003_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0003_stereo.wav
+Playback duration: 12.49 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0002.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0002.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0003_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0003_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0002.wav
+Recorded duration: 13.20 seconds
+File size: 40558956 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0002-metadata.json
+
+======================================================================
+Recording 4/5
+Speech: 1272-128104-0003.flac
+Noise file: ch04.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0003.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0004_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch04.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0004_noise.wav repeat 1000 trim 0 9.9
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0004_noise.wav -v 1.0 /dev/shm/clean_recording/0004_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0004_stereo.wav
+Playback duration: 9.90 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0003.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0003.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0004_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0004_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0003.wav
+Recorded duration: 10.60 seconds
+File size: 32570668 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0003-metadata.json
+
+======================================================================
+Recording 5/5
+Speech: 1272-128104-0005.flac
+Noise file: ch05.wav
+Noise dataset: normalized--32LUFS
+Pan angle: 0.00
+======================================================================
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/LibriSpeech/1272-128104-0005.flac -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0005_speech.wav
+Running command:
+sox /home/ami/audiodaten/normalized_-32LUFS/OMEETING/ch05.wav -r 44100 -c 1 -b 16 -e signed-integer /dev/shm/clean_recording/0005_noise.wav repeat 1000 trim 0 9.01
+Running command:
+sox -M -v 0.4 /dev/shm/clean_recording/0005_noise.wav -v 1.0 /dev/shm/clean_recording/0005_speech.wav -r 44100 -c 2 -b 16 -e signed-integer /dev/shm/clean_recording/0005_stereo.wav
+Playback duration: 9.01 seconds
+Recording command:
+arecord --fatal-errors -D hw:CARD=UMA16v2,DEV=0 -c 16 -r 48000 -f S32_LE -t wav --buffer-time=1000000 --period-time=200000 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0005.partial.wav
+Recording WAVE '/home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0005.partial.wav' : Signed 32 bit Little Endian, Rate 48000 Hz, Channels 16
+Running command:
+aplay -D plughw:CARD=Headphones,DEV=0 --buffer-time=1000000 --period-time=200000 /dev/shm/clean_recording/0005_stereo.wav
+Playing WAVE '/dev/shm/clean_recording/0005_stereo.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Stereo
+Aborted by signal Interrupt...
+Saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0005.wav
+Recorded duration: 9.80 seconds
+File size: 30112748 bytes
+Metadata saved: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060/1272-128104-0005-metadata.json
+
+All recordings completed.
+Transfer attempt 1/3
+Running command:
+ssh -o BatchMode=yes -o ConnectTimeout=15 ekwug@192.168.137.1 cmd /c if not exist "Desktop\praktikum\audio\recordings\noise_normalized--32LUFS\mic_p000" mkdir "Desktop\praktikum\audio\recordings\noise_normalized--32LUFS\mic_p000"
+Running command:
+scp -r -o BatchMode=yes -o ConnectTimeout=15 -o ServerAliveInterval=15 -o ServerAliveCountMax=3 /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060 ekwug@192.168.137.1:Desktop/praktikum/audio/recordings/noise_normalized--32LUFS/mic_p000/
+Transfer completed: /home/ami/audiodaten/recordings/noise_normalized--32LUFS/mic_p000/speaker_s1_p060_s2_p060
+All operations completed successfully.
+Single-condition test sweep completed cleanly!
+ami@raspberrypi:~/testcode $ cd ~/testcode && python3 -c '
+import main
+main.stepper.set_current_angle(30)
+main.stepper2.set_current_angle(-30)
+main.move_steppers_to(90, 90)
+print("Both steppers returned to 90 degrees!", flush=True)
+'
+Stepper 1 raw angle: 29.93
+Stepper 2 raw angle: -29.93
+Dataset stepper 1 angle: 60.08
+Dataset stepper 2 angle: 60.08
+Moving motor by 29.92 degrees, clockwise=False
+29.924999999999997 degrees = 133 pulses
+Moving motor by 29.92 degrees, clockwise=True
+29.924999999999997 degrees = 133 pulses
+Stepper 1 raw angle: 0.00
+Stepper 2 raw angle: 0.00
+Dataset stepper 1 angle: 90.00
+Dataset stepper 2 angle: 90.00
+Both steppers returned to 90 degrees!
+ami@raspberrypi:~/testcode $ client_loop: send disconnect: Connection reset
+PS C:\Users\ekwug> $Host.UI.RawUI.GetBufferContents((New-Object Management.Automation.Host.Rectangle 0, 0, $Host.UI.RawUI.BufferSize.Width, $Host.UI.RawUI.CursorPosition.Y)) | ForEach-Object { -join ($_.Character) } | Out-File "$([Environment]::GetFolderPath('Desktop'))\session_dump.txt" -Encoding utf8
+PS C:\Users\ekwug>
+
