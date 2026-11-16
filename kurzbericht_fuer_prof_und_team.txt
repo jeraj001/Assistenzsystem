@@ -1,0 +1,147 @@
+================================================================================
+KURZBERICHT & BRIEFING-LEITFADEN FÜR DAS TEAM & DIE PROFESSOREN
+Thema: Ergebnisse des ersten akustischen Prüfstandstests (12. November 2026)
+Projekt 04: Optimierung des Mikrofon-Array Aufnahmesystems
+Verfasser: Chukwuekwugo Egbuonu (Kirito077)
+Adressaten: Teamkollegen zur Vorlage & Präsentation bei Prof. Dr. Nitsche / Prof. Dr. Naroska
+================================================================================
+
+LIEBES TEAM (BITTE VOR DEM GESPRÄCH MIT DEM PROF KURZ DURCHLESEN):
+--------------------------------------------------------------------------------
+Falls ich morgen beim Termin mit den Professoren nicht persönlich anwesend sein
+kann, ist dieses Dokument genau für euch geschrieben. Ihr könnt diesen Leitfaden
+direkt verwenden oder als Spickzettel nutzen, um den Professoren strukturiert,
+präzise und ohne unnötig kompliziertes Fachchinesisch zu erklären, was wir beim
+sechsstündigen Labortest am 12.11.2026 herausgefunden haben.
+
+Sagt den Professoren gerne direkt:
+"Chukwuekwugo hat den Testlauf durchgeführt und die Ergebnisse zusammengefasst.
+Die Kernbotschaft ist: Die gesamte Software- und Datenübertragungskette
+funktioniert zu 100 %, aber der Teststand hat vier ganz konkrete mechanische
+und akustische Hardware-Engpässe, die wir jetzt beheben müssen."
+
+
+1. DIE KERNBOTSCHAFT AUF EINEN BLICK (DER "30-SEKUNDEN-PITCH")
+--------------------------------------------------------------------------------
+* Das System lebt und läuft: Raspberry Pi, das 16-Kanal-Mikrofonarray (UMA-16),
+  die Servosteuerung (Pan-Tilt HAT) und die automatische Übertragung der
+  Aufnahmen auf den Windows-PC funktionieren durchgehend.
+* Wir haben echte Testaufnahmen gemacht (LibriSpeech-Sprache + OMEETING-Lärm).
+* Allerdings haben wir vier klare physikalische Flaschenhälse aufgedeckt, die
+  genau erklären, warum frühere Messungen fehlerhaft waren und warum der Aufbau
+  noch nicht voll einsatzbereit für Langzeitmessungen ist:
+  1. Lautsprecher-Pegel & extremes 50-Meter-Kabel
+  2. Motor-Blockade & Durchbiegung der 1,5-Meter-Stangen
+  3. 0°-Referenzausrichtung des Mikrofonarrays
+  4. Kabelsalat & Notwendigkeit einer einfachen Web-Bedienoberfläche
+
+
+2. WAS FUNKTIONIERT (DIE GUTEN NACHRICHTEN)
+--------------------------------------------------------------------------------
+1. Vollständige Fernsteuerung ohne Monitor/Tastatur (Headless):
+   - Der Raspberry Pi verbindet sich automatisch mit dem Windows Mobile Hotspot.
+   - Der SSH-Zugang ist stabil (WLAN-Energiesparmodus wurde deaktiviert).
+2. 16-Kanal-Audioaufnahme:
+   - Das miniDSP UMA-16 v2 wird sauber erkannt und nimmt synchron 16 Kanäle
+     in 48 kHz Studioqualität auf.
+3. Schwenkmechanismus (Pan-Tilt HAT):
+   - Der Servotreiber richtet das Mikrofonarray präzise auf 90° Mittelstellung
+     (0° akustische Hauptachse) aus.
+4. Vollautomatischer Daten-Workflow:
+   - Nach jedem Durchlauf werden die WAV-Audiodateien und JSON-Metadaten
+     selbstständig per SCP auf den Windows-Laptop kopiert und auf der SD-Karte
+     bereinigt.
+
+
+3. DIE VIER HAUPTPROBLEME & WIE WIR SIE LÖSEN (FÜR DAS GESPRÄCH)
+--------------------------------------------------------------------------------
+
+PUNKT 1: LAUTSTÄRKE-UNGLEICHGEWICHT & DIE 50-METER-KABEL-FALLE
+--------------------------------------------------------------
+* Was ist das Problem?
+  Der passive Zweitlautsprecher (Störgeräusch) war extrem leise im Vergleich
+  zum aktiven Hauptlautsprecher (Sprache). Auch insgesamt war der Schallpegel
+  im Raum zu niedrig.
+* Warum ist das so?
+  Obwohl der gesamte Prüfstand nur ca. 4 bis 5 Meter breit ist, war zwischen
+  den beiden Boxen ein geschätzt 30 bis 50 Meter langes, aufgewickeltes
+  Lautsprecherkabel verlegt! Der enorme elektrische Leitungswiderstand schluckt
+  einen Großteil der Verstärkerleistung.
+* Unsere Lösung / Nächster Schritt:
+  - Wir kürzen bzw. tauschen das Kabel gegen ein 4,5 Meter langes, hochwertiges
+    Lautsprecherkabel (mind. 1,5 mm² Querschnitt) aus.
+  - Wir messen die Lautstärke beider Boxen mit einem Dezibel-Messgerät (dB-Meter)
+    genau ein, damit Sprach- und Rauschpegel reproduzierbar sind.
+
+
+PUNKT 2: SCHRITTMOTOR-BLOCKADE & DURCHBIEGUNG DER 1,5-M-STANGEN
+---------------------------------------------------------------
+* Was ist das Problem?
+  Als wir den 30°-Winkelsprung testen wollten (von 90° auf 60°), blockierten
+  die Schrittmotoren mit lautem Rattern ("Ratschgeräusch" wie bei einer
+  durchrutschenden Akkuschrauber-Rutschkupplung). Die Lautsprecherwagen bewegten
+  sich nur 1 bis 2 cm statt der geforderten 75 cm Kreisbogen!
+* Warum ist das so?
+  Zwei Ursachen kommen zusammen:
+  a) Die 1,5 Meter langen Aluminiumstangen sind in der Mitte zu elastisch und
+     biegen sich unter dem Drehmoment sichtbar durch. Die Kraft kommt an den
+     Rädern nicht als Drehung an.
+  b) Der Prüfstand steht auf Teppichboden ("Rug"). Die kleinen Rollen der
+     Lautsprecherwagen haben auf Teppich einen enormen Roll- und Reibungswiderstand.
+  c) Das Netzteil lieferte zeitweise nur 12 V, was das Drehmoment der Motoren
+     halbiert hat.
+* Unsere Lösung / Nächster Schritt:
+  - Treiber stabil mit 24 V bis 28 V (3 A) versorgen (verdoppelt das Drehmoment).
+  - Stangen mechanisch versteifen (z. B. durch ein Carbon-Dreiecks-Fachwerk)
+    oder die kleinen Rollen gegen leichtgängige Skaterollen tauschen.
+
+
+PUNKT 3: PHYSIKALISCHER NULLPUNKT DES MIKROFONARRAYS (0°-REFERENZ)
+------------------------------------------------------------------
+* Was ist das Problem?
+  Der Servo fährt zwar rechnerisch auf 90° (Mitte), aber wir müssen sicherstellen,
+  dass die Platine des UMA-16 Arrays auch millimetergenau im 90°-Winkel zu den
+  Führungsschienen der Lautsprecher steht.
+* Unsere Lösung / Nächster Schritt:
+  - Einmalige mechanische Ausrichtung mit Lot / Laserpointer vor den Messreihen.
+  - Falls eine minimale Abweichung vorliegt, tragen wir den festen Offset-Wert
+    in das Python-Konfigurationsskript ein.
+
+
+PUNKT 4: KABELSALAT & ZU SCHWERE BEDIENUNG (WIR BRAUCHEN EIN WEB-GUI)
+---------------------------------------------------------------------
+* Was ist das Problem?
+  - Die Verkabelung am Raspberry Pi besteht aus vielen fliegenden Einzeldrähten
+    (Dupont-Jumper). Beim Test hatte Motor 1 einen Wackelkontakt an Pin 36.
+  - Die Bedienung über Linux-Terminal, SSH-Befehle und IP-Adressen ist stressig,
+    fehleranfällig und für jemanden ohne Linux-Erfahrung kaum bedienbar.
+* Unsere Lösung / Nächster Schritt:
+  - Wir fassen die Leitungen sauber in Kabelkanälen mit Zugentlastung zusammen.
+  - Wir entwickeln eine einfache Web-Oberfläche (Web-GUI): Jeder Student oder
+    Dozent kann im Browser einfach die IP des Pi aufrufen und auf "Start Sweep"
+    oder "Fahre Lautsprecher auf 45°" klicken, ohne eine Zeile Code tippen zu müssen.
+
+
+4. KONKRETE FRAGEN AN DIE PROFESSOREN (BITTE STELLEN!)
+--------------------------------------------------------------------------------
+1. Budget / Material:
+   Können wir aus Laborbeständen oder über das Lehrstuhl-Budget:
+   - Ein kurzes 4,5 m Lautsprecherkabel (2× 1,5 mm²) beschaffen?
+   - Ein Schallpegelmessgerät (dB-Meter) für die Kalibrierung leihen?
+   - Leichtgängige Rollen oder Versteifungsstreben für die 1,5-Meter-Stangen nutzen?
+2. Bodenbelag / Raum:
+   Soll der Prüfstand dauerhaft auf dem Teppichboden bleiben, oder kann er auf
+   glattem Hallenboden / PVC betrieben werden (was die Motorreibung um 70 % senken würde)?
+3. Web-Interface:
+   Finden die Professoren den Plan gut, ein Web-Dashboard (FastAPI / Streamlit)
+   auf dem Raspberry Pi aufzusetzen, damit zukünftige Praktikumsgruppen das
+   System intuitiv bedienen können?
+
+
+5. ZUSAMMENFASSUNG FÜR DEN SCHLUSSSATZ
+--------------------------------------------------------------------------------
+"Wir wissen jetzt genau, wo die Fehler der alten Abschlussarbeit lagen. Die
+Software und Datenerfassung haben wir erfolgreich zum Laufen gebracht. Wenn wir
+jetzt das 50m-Kabel austauschen und die Stangen mechanisch entlasten, haben wir
+einen vollautomatischen, präzisen Prüfstand für hochwertige Forschungsdaten."
+================================================================================
