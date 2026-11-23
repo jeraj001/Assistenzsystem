@@ -1,0 +1,17 @@
+{
+  "mode": "simulation",
+  "pi_host": "192.168.137.246",
+  "limits": {
+    "speaker_min": 0,
+    "speaker_max": 120,
+    "pan_min": -45,
+    "pan_max": 45,
+    "tilt_min": -30,
+    "tilt_max": 30
+  },
+  "safe_park": {
+    "pan": 0,
+    "tilt": 0
+  },
+  "channel_10_muted": true
+}

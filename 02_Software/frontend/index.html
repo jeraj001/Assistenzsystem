@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AMI // Mic-Array Studio</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- TOP TELEMETRY BAR -->
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-dot"></div>
+      <div>
+        <div class="brand-title">AMI // MIC-ARRAY STUDIO</div>
+        <div class="brand-sub">HSNR Acoustic Testbed Control &amp; Telemetry</div>
+      </div>
+    </div>
+
+    <div class="status-pills">
+      <span id="pill-mode" class="pill pill-amber">SIMULATION</span>
+      <span id="pill-conn" class="pill pill-red">DISCONNECTED</span>
+      <span id="pill-uma" class="pill pill-ok">UMA-16 v2</span>
+      <span id="pill-i2c" class="pill pill-ok">I2C PAN-TILT</span>
+      <span id="pill-enc" class="pill pill-muted">ENCODERS: OPEN-LOOP</span>
+      <span id="pill-temp" class="pill pill-mono">CPU --.-°C</span>
+    </div>
+
+    <button id="btn-estop" class="btn-estop">E-STOP</button>
+  </header>
+
+  <!-- MAIN COCKPIT GRID -->
+  <main class="cockpit">
+    <!-- LEFT COLUMN: MOTOR & SERVO CONTROLS -->
+    <section class="panel controls-panel">
+      <div class="panel-header">
+        <h2>Actuator Control Deck</h2>
+        <span id="motion-badge" class="badge badge-idle">IDLE</span>
+      </div>
+
+      <!-- Motor Power / Silent Recording Toggle -->
+      <div class="subcard power-row">
+        <div>
+          <div class="label-strong">Stepper Motor Power</div>
+          <div class="label-hint">Cut power during capture to eliminate motor buzz</div>
+        </div>
+        <button id="btn-motor-power" class="toggle-btn active">ON</button>
+      </div>
+
+      <!-- Speaker 1 (Speech) -->
+      <div class="subcard">
+        <div class="control-top">
+          <span class="dot dot-cyan"></span>
+          <span class="label-strong">Speaker 1 (Target Speech)</span>
+          <span id="val-s1" class="angle-readout cyan">90.0°</span>
+        </div>
+        <input id="slider-s1" type="range" min="0" max="120" step="1" value="90" class="slider cyan-slider" />
+        <div class="presets">
+          <button class="preset-btn" data-axis="speaker1" data-angle="0">0°</button>
+          <button class="preset-btn" data-axis="speaker1" data-angle="30">30°</button>
+          <button class="preset-btn" data-axis="speaker1" data-angle="60">60°</button>
+          <button class="preset-btn" data-axis="speaker1" data-angle="90">90°</button>
+          <button class="preset-btn" data-axis="speaker1" data-angle="120">120°</button>
+        </div>
+      </div>
+
+      <!-- Speaker 2 (Noise) -->
+      <div class="subcard">
+        <div class="control-top">
+          <span class="dot dot-amber"></span>
+          <span class="label-strong">Speaker 2 (Noise Source)</span>
+          <span id="val-s2" class="angle-readout amber">60.0°</span>
+        </div>
+        <input id="slider-s2" type="range" min="0" max="120" step="1" value="60" class="slider amber-slider" />
+        <div class="presets">
+          <button class="preset-btn" data-axis="speaker2" data-angle="0">0°</button>
+          <button class="preset-btn" data-axis="speaker2" data-angle="30">30°</button>
+          <button class="preset-btn" data-axis="speaker2" data-angle="60">60°</button>
+          <button class="preset-btn" data-axis="speaker2" data-angle="90">90°</button>
+          <button class="preset-btn" data-axis="speaker2" data-angle="120">120°</button>
+        </div>
+      </div>
+
+      <!-- Mic Array Pan & Tilt -->
+      <div class="subcard">
+        <div class="control-top">
+          <span class="dot dot-emerald"></span>
+          <span class="label-strong">Mic Array Pan (Horizontal)</span>
+          <span id="val-pan" class="angle-readout emerald">0.0°</span>
+        </div>
+        <input id="slider-pan" type="range" min="-45" max="45" step="1" value="0" class="slider emerald-slider" />
+        <div class="presets">
+          <button class="preset-btn" data-axis="pan" data-angle="-45">-45°</button>
+          <button class="preset-btn" data-axis="pan" data-angle="0">0°</button>
+          <button class="preset-btn" data-axis="pan" data-angle="45">+45°</button>
+        </div>
+
+        <div class="control-top" style="margin-top: 14px;">
+          <span class="dot dot-emerald"></span>
+          <span class="label-strong">Mic Array Tilt (Vertical)</span>
+          <span id="val-tilt" class="angle-readout emerald">0.0°</span>
+        </div>
+        <input id="slider-tilt" type="range" min="-30" max="30" step="1" value="0" class="slider emerald-slider" />
+      </div>
+
+      <!-- Quick Safety Actions -->
+      <div class="action-row">
+        <button id="btn-home" class="action-btn">Reset to 90° / 0°</button>
+        <button id="btn-park" class="action-btn action-secondary">Safe Park Servos</button>
+      </div>
+    </section>
+
+    <!-- CENTER COLUMN: 2D POLAR RIG VISUALIZER -->
+    <section class="panel rig-panel">
+      <div class="panel-header">
+        <h2>2D Rig Geometry &amp; Orientation</h2>
+        <span class="mono-meta">R = 1.50 m &nbsp;|&nbsp; SAFE ARC: 120°</span>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="rig-canvas"></canvas>
+      </div>
+      <div class="rig-legend">
+        <span><i class="swatch cyan-bg"></i> Speaker 1 (Speech)</span>
+        <span><i class="swatch amber-bg"></i> Speaker 2 (Noise)</span>
+        <span><i class="swatch emerald-bg"></i> UMA-16 Array Axis</span>
+        <span><i class="swatch red-bg"></i> Rear Cable Zone</span>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: LIVE 16-CHANNEL AUDIO MONITOR -->
+    <section class="panel audio-panel">
+      <div class="panel-header">
+        <h2>UMA-16 Live Audio (4×4)</h2>
+        <span id="rms-badge" class="mono-meta">RMS: --.- dBFS</span>
+      </div>
+
+      <div class="ch10-bar">
+        <span class="label-hint">Ch 10 Hardware Noise Guard</span>
+        <button id="btn-ch10" class="toggle-btn active">CH10 MUTED</button>
+      </div>
+
+      <div id="mic-grid" class="mic-grid"></div>
+
+      <div id="vu-bars" class="vu-bars"></div>
+    </section>
+  </main>
+
+  <!-- BOTTOM CONSOLE: LIVE TRANSCRIPTION & EVENT LOG -->
+  <section class="bottom-grid">
+    <div class="panel stt-panel">
+      <div class="panel-header">
+        <h2>Speaker Output Transcription (Whisper Pipeline)</h2>
+        <button id="btn-transcribe" class="btn-primary">● Record &amp; Transcribe</button>
+      </div>
+      <div id="stt-feed" class="stt-feed"></div>
+    </div>
+
+    <div class="panel log-panel">
+      <div class="panel-header">
+        <h2>System Telemetry Log</h2>
+        <span id="pi-ip-label" class="mono-meta">HOST: 192.168.137.246</span>
+      </div>
+      <div id="log-feed" class="log-feed"></div>
+    </div>
+  </section>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
